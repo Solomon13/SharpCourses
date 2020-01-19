@@ -1,4 +1,5 @@
-﻿using ReferenceLib;
+﻿using OopSharp;
+using ReferenceLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,7 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            var t = new LogicalOperations();
-            t.NullableSafeOperation();
+            var t = new SimpleClass("123", 123);
         }
     }
 }
