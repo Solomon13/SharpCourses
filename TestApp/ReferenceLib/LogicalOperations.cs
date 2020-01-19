@@ -43,6 +43,25 @@ namespace ReferenceLib
             object o1 = o ?? string.Empty; //only assignment
         }
 
+        public void NullableSafeOperation()
+        {
+            string str = null;
+            int length;
+
+            if(str != null)
+            {
+                length = str.Length;
+            }
+
+            //Or
+            length = str?.Length ?? 0;
+            
+            string newSring = str?.ToUpper();
+
+            Console.WriteLine($"Not null length = {str?.Length}");
+
+        }
+
         public void For()
         {
             for (int i = 0; i < 4; i++)
@@ -99,7 +118,7 @@ namespace ReferenceLib
 
         }
 
-        static void Switch()
+        public void Switch()
         {
             string langChoice = Console.ReadLine();
             int n = int.Parse(langChoice);

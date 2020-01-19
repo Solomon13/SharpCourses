@@ -107,5 +107,34 @@ namespace ReferenceLib
 
             int a1 = Convert.ToInt32(s1); //Converter helper class
         }
+
+        public void IsAndAs()
+        {
+            int a = 1;
+
+            if(a is int) //possible to check
+            {
+                Console.WriteLine("Is int");
+            }
+
+            object str = "qwerty";
+
+            if(str is string)
+            {
+                string realyStr = str as string; //cast to string
+            }
+
+            object intObj = 1;
+            //int realInt = intObj as int; //can't work with value types. 
+
+            if((str as Type) != null ) //null if not possible to cast
+            {
+                Console.WriteLine("Casted as Type");
+            }
+            else
+            {
+                Console.WriteLine("Not Casted as Type");
+            }
+        }
     }
 }

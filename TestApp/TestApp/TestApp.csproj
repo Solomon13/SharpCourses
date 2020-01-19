@@ -50,9 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ReferenceLib\ReferenceLib.csproj">
+    <ProjectReference Include="..\ReferenceLib\SimpleSharp.csproj">
       <Project>{6687aa53-0067-44a4-87da-507e6116ed4d}</Project>
-      <Name>ReferenceLib</Name>
+      <Name>SimpleSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

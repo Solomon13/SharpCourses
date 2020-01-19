@@ -11,6 +11,8 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
+            var t = new LogicalOperations();
+            t.NullableSafeOperation();
         }
     }
 }

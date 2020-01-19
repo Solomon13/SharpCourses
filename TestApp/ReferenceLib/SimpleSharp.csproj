@@ -45,6 +45,7 @@
     <Compile Include="Enums.cs" />
     <Compile Include="LogicalOperations.cs" />
     <Compile Include="Methods.cs" />
+    <Compile Include="WorkWithStruct.cs" />
     <Compile Include="WorkWithTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
