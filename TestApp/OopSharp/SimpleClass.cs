@@ -37,7 +37,7 @@ namespace OopSharp
         }
 
         //this usage difference 
-        public SimpleClass(int InitWithConstructor) : this() //use private cinstructor
+        public SimpleClass(int InitWithConstructor) : this() //use private constructor
         {
             this.InitWithConstructor = InitWithConstructor; //use to identify the class member
             Console.WriteLine("SimpleClass 1 args");

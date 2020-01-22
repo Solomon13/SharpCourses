@@ -12,7 +12,18 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            var t = new SimpleClass("123", 123);
+            var t1 = new GCTester();
+
+            t1.TestManaged();
+            t1.TestUnmanaged();
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+
+            var t2 = new DisposableObjectTester();
+            t2.TestDispose();
+            t2.TestDisposeUsing();
         }
     }
 }
