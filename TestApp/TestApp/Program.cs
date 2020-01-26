@@ -1,4 +1,5 @@
-﻿using OopSharp;
+﻿using ExtendedSharp;
+using OopSharp;
 using ReferenceLib;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,16 @@ namespace TestApp
             var ex = new ExceptionsWorker();
             ex.HandleException2();
             ex.CatchByFinally();
+
+            var generic = new ClassWithGeneric();
+            Console.WriteLine($"Generic sum = { generic.Sum<int>(new int[] { 1, 2, 3 }, new Int32Adder())}");
+
+            var delegateTester = new WorkWithDelegates();
+            delegateTester.TestDelegates();
+            delegateTester.TestMulticast();
+
+            var eventTester = new WorkWithEventsTester();
+            eventTester.TestEvents();
 
             Console.ReadLine();
         }
