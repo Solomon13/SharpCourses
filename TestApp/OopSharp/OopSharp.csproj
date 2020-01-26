@@ -42,8 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractClass.cs" />
     <Compile Include="DisposableObject.cs" />
+    <Compile Include="ExceptionsWorker.cs" />
     <Compile Include="GarbageCollector.cs" />
+    <Compile Include="Inheritance.cs" />
     <Compile Include="PartialClass.cs" />
     <Compile Include="PartialClassTwo.cs" />
     <Compile Include="SimpleBaseClass.cs" />

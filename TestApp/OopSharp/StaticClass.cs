@@ -40,6 +40,12 @@ namespace OopSharp
             return str + char.ToUpper(c);
         }
 
+        //use static and this for methods extension - can be applied for interfaces
+        public static void EnumerableExtension(this IEnumerable<object> enumerable)
+        {
+
+        }
+
         #endregion
     }
 }

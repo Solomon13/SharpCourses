@@ -12,18 +12,17 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            var t1 = new GCTester();
+            var tester = new InheritanceTester();
+            tester.TestPolymorph();
 
-            t1.TestManaged();
-            t1.TestUnmanaged();
+            // var abstractInstance = new AbstractClass(); -> imposible
+            var derive = new AbstractDerive();
 
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            var ex = new ExceptionsWorker();
+            ex.HandleException2();
+            ex.CatchByFinally();
 
-
-            var t2 = new DisposableObjectTester();
-            t2.TestDispose();
-            t2.TestDisposeUsing();
+            Console.ReadLine();
         }
     }
 }
