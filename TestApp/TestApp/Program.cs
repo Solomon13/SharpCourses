@@ -33,6 +33,10 @@ namespace TestApp
             var eventTester = new WorkWithEventsTester();
             eventTester.TestEvents();
 
+            var extr = new Extensions();
+            extr.TestSum();
+            extr.TestExtensions();
+
             Console.ReadLine();
         }
     }

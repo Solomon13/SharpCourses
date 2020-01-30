@@ -62,6 +62,9 @@ namespace ExtendedSharp
             };
 
             classWithEvents.SomeItem = "Once again new Value";
+
+            //No, you can't call it. Only += or -= available
+            //classWithEvents.ClassChangedState(classWithEvents, null);
         }
     }
 }
