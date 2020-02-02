@@ -55,6 +55,9 @@ namespace TestApp
             attributesTester.TestClassAttribute();
             attributesTester.TestFieldAttribute();
 
+            var assemblyTester = new DynamicLibraryTester();
+            assemblyTester.TestDynamicAssembly();
+
             Console.ReadLine();
         }
     }

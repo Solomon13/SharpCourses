@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{88BD9589-4142-4050-A68E-2CB3A01B7B03}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>TestApp</RootNamespace>
-    <AssemblyName>TestApp</AssemblyName>
+    <ProjectGuid>{78658BCD-5E1E-4280-9AD2-2EAD3671664E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TestAssembly</RootNamespace>
+    <AssemblyName>TestAssembly</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,24 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="MathExtentions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ExtendedSharp\ExtendedSharp.csproj">
-      <Project>{a8b6d6d1-98f6-427a-b523-8b95266cf724}</Project>
-      <Name>ExtendedSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OopSharp\OopSharp.csproj">
-      <Project>{e2ece85e-2dcc-4c3c-bfbb-4479d0924a07}</Project>
-      <Name>OopSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ReferenceLib\SimpleSharp.csproj">
-      <Project>{6687aa53-0067-44a4-87da-507e6116ed4d}</Project>
-      <Name>SimpleSharp</Name>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{5e8c0b98-551b-4eb4-ac8b-2ac53403ddd9}</Project>
+      <Name>Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
