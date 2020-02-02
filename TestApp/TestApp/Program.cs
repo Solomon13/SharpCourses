@@ -51,6 +51,10 @@ namespace TestApp
             reflectionTester.InvokeStatic();
             reflectionTester.InvokePrivate();
 
+            var attributesTester = new AttributesTester();
+            attributesTester.TestClassAttribute();
+            attributesTester.TestFieldAttribute();
+
             Console.ReadLine();
         }
     }
