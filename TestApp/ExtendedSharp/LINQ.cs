@@ -11,11 +11,12 @@ namespace ExtendedSharp
     {
         public void AnonymType()
         {
+            int speed = 56;
             //Create an anonym type
             var purchaseltem = new
             {
                 TimeBought = DateTime.Now,
-                ItemBought = new { Color = "Red", Make = "Saab", CurrentSpeed = 55 },
+                ItemBought = new { Color = "Red", Make = "Saab", CurrentSpeed = speed },
                 Price = 34.000
             };
 
@@ -32,7 +33,7 @@ namespace ExtendedSharp
             string[] currentVideoGames = { "Morrowind", "Uncharted 2", "Fallout 3", "Daxter", "System Shock 2" };
 
             //simple LINQ - strong typed
-            IEnumerable<string> subset = from g in currentVideoGames //like foreach
+            var subset = from g in currentVideoGames //like foreach
                                          where g.Contains(" ") //condition check
                                          orderby g //results ordering
                                          select g; //result selection
@@ -56,9 +57,11 @@ namespace ExtendedSharp
             string[] currentVideoGames = { "Morrowind", "Uncharted 2", "Fallout 3", "Daxter", "System Shock 2" };
 
             //simple LINQ - strong typed
-            IEnumerable<string> subset = currentVideoGames.Where(g => g.Contains(" ")).
-                                                           OrderBy(g => g).
-                                                           Select(g => g);
+            IEnumerable<string> subset = currentVideoGames.Where(g =>
+            {
+                Console.WriteLine("asf");
+                return g.Contains(" ");
+            }).OrderBy(g => g.Length).Select(g => g);
 
 
             foreach (string s in subset)
@@ -69,6 +72,8 @@ namespace ExtendedSharp
                                                  OrderBy(g => g).
                                                  Select(g => g.Length);
 
+
+            var res = currentVideoGames.All(i => i is string);
             //SQL like syntax
             var anotherSubset = currentVideoGames.Select(g => g.Substring(3));
         }
@@ -99,11 +104,19 @@ namespace ExtendedSharp
         {
             List<string> currentVideoGames = new List<string> { "Morrowind 2", "Uncharted 2", "Fallout 3", "Daxter", "System Shock 2" };
 
+            var copy = currentVideoGames.ToArray();
+
             //Build query
             var subset = from g in currentVideoGames //like foreach
                          where g.Contains(" ") //condition check
                          orderby g //results ordering
                          select g; //result selection
+
+            //Build query
+            var subset2 = new List<string>(from g in currentVideoGames //like foreach
+                         where g.Contains(" ") //condition check
+                         orderby g //results ordering
+                         select g); //result selection
 
             currentVideoGames.Remove(currentVideoGames.Last());
             bool bFirst = true;
@@ -119,6 +132,19 @@ namespace ExtendedSharp
                     bFirst = false;
                 }
             }
+
+
+            //foreach (string s in subset)
+            //{
+            //    Console.WriteLine("Item: {0}", s);
+
+            //    if (bFirst)
+            //    {
+            //        //this will not go to foreach
+            //        currentVideoGames.Add("Warcraft 3");
+            //        bFirst = false;
+            //    }
+            //}
 
             var subsetList = subset.ToList();
 
