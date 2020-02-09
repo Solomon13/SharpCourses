@@ -37,26 +37,34 @@ namespace TestApp
             //extr.TestSum();
             //extr.TestExtensions();
 
-            var linq = new LINQ();
-            linq.LinqDelayExecution();
-            Console.WriteLine("=========================");
+            //var linq = new LINQ();
+            //linq.LinqDelayExecution();
+            //Console.WriteLine("=========================");
 
-            linq.TestLinqMethod();
+            //linq.TestLinqMethod();
 
 
-            var reflectionTester = new TypeReflectionTester();
-            reflectionTester.DetectType();
-            reflectionTester.InvokeMethodNoArgs();
-            reflectionTester.InvokeMethodWithArgs();
-            reflectionTester.InvokeStatic();
-            reflectionTester.InvokePrivate();
+            //var reflectionTester = new TypeReflectionTester();
+            //reflectionTester.DetectType();
+            //reflectionTester.InvokeMethodNoArgs();
+            //reflectionTester.InvokeMethodWithArgs();
+            //reflectionTester.InvokeStatic();
+            //reflectionTester.InvokePrivate();
 
-            var attributesTester = new AttributesTester();
-            attributesTester.TestClassAttribute();
-            attributesTester.TestFieldAttribute();
+            //var attributesTester = new AttributesTester();
+            //attributesTester.TestClassAttribute();
+            //attributesTester.TestFieldAttribute();
 
-            var assemblyTester = new DynamicLibraryTester();
-            assemblyTester.TestDynamicAssembly();
+            //var assemblyTester = new DynamicLibraryTester();
+            //assemblyTester.TestDynamicAssembly();
+
+            //var t = new Threading();
+            //t.ThreadsWithDelegates();
+            //t.ThreadsWithDelegatesAndCallback();
+            //t.NewThread();
+
+            var t1 = new ThreadSynchronization();
+            t1.ThreadsHellTest(enumSynchStateTester.Synchronization);
 
             Console.ReadLine();
         }
