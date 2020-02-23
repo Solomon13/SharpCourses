@@ -63,8 +63,17 @@ namespace TestApp
             //t.ThreadsWithDelegatesAndCallback();
             //t.NewThread();
 
-            var t1 = new ThreadSynchronization();
-            t1.ThreadsHellTest(enumSynchStateTester.Synchronization);
+            //var t1 = new ThreadSynchronization();
+            //t1.ThreadsHellTest(enumSynchStateTester.Synchronization);
+
+            //var t = new ThreadingExtendedTester();
+            //t.TestDispatcher();
+            //t.TestTreadPool();
+
+            var t1 = new TasksTester();
+            t1.TestAsync3();
+
+            Console.WriteLine("After call");
 
             Console.ReadLine();
         }

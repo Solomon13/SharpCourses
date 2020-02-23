@@ -129,6 +129,7 @@ namespace ExtendedSharp
 
             _resetEvent.WaitOne(6000); //timeline to wait, optional
 
+            int a = 0;
         }
 
         private void LongTermIntAdd(object args)

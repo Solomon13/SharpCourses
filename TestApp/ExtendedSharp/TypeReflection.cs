@@ -56,7 +56,11 @@ namespace ExtendedSharp
 
             //create instance
             var reflector = Activator.CreateInstance(t1);
+
             methodInfo.Invoke(reflector, null);
+
+            var r2 = new TypeReflection();
+            methodInfo.Invoke(r2, null);
         }
 
         public void InvokeMethodWithArgs()
