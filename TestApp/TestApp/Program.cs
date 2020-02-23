@@ -71,7 +71,7 @@ namespace TestApp
             //t.TestTreadPool();
 
             var t1 = new TasksTester();
-            t1.TestAsync3();
+            t1.TestAsyncWithException();
 
             Console.WriteLine("After call");
 

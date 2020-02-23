@@ -48,7 +48,7 @@ namespace ExtendedSharp
             Console.WriteLine("After await");
         }
 
-        public async Task DoAsyncWithReturn()
+        public async Task DoWithReturnAsync()
         {
             await Task.Factory.StartNew(() =>
             {
@@ -60,7 +60,7 @@ namespace ExtendedSharp
             Console.WriteLine("After await");
         }
 
-        public Task<int> DoAsyncWithIntReturn()
+        public Task<int> DoWithIntReturnAsync()
         {
             return Task.Factory.StartNew(() =>
             {
@@ -71,6 +71,26 @@ namespace ExtendedSharp
                 return 15;
             });
         }
+
+        public async Task DoWithExceptionAsync()
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(5000); //Long tearm actions
+
+                Console.WriteLine("In task");
+
+                throw new Exception("EXCEPTION!!!!");
+            });
+
+            Console.WriteLine("After exception");
+        }
+
+        //public async string NotPossible()
+        //{
+
+        //}
+
     }
 
     public class TasksTester
@@ -86,7 +106,7 @@ namespace ExtendedSharp
         public void TestAsync2()
         {
             var t = new Tasks();
-            var retTask = t.DoAsyncWithReturn();
+            var retTask = t.DoWithReturnAsync();
 
             Console.WriteLine("In TestAsync");
 
@@ -96,9 +116,47 @@ namespace ExtendedSharp
         public async void TestAsync3()
         {
             var t = new Tasks();
-            var resultValue = await t.DoAsyncWithIntReturn();
+            var resultValue = await t.DoWithIntReturnAsync();
 
             Console.WriteLine($"In TestAsync result = {resultValue}");
+        }
+
+        public void TestAsyncWithException()
+        {
+            var t = new Tasks();
+
+            try
+            {
+                t.DoWithExceptionAsync().Wait();
+            }
+            catch
+            {
+                Console.WriteLine("Catched!!!");
+            }
+        }
+
+        public async void TestLampdaAsync()
+        {
+            //you can use async for lampda
+            var res = await Task.Run(async() =>
+            {
+                var t = new Tasks();
+                return await t.DoWithIntReturnAsync();
+            });
+        }
+
+        public void UsefulTaskMethods()
+        {
+            var t = Task.Run(() => { Thread.Sleep(10000); });
+
+            Task.WaitAll(new[] { t });
+
+            var t1 = Task.Run(() => { Thread.Sleep(10000); });
+
+            t.ContinueWith(prevTask =>
+            {
+                Thread.Sleep(10000);
+            });
         }
     }
 }
