@@ -21,13 +21,24 @@ namespace ExtendedSharp
         {
             var cancelationTocken = new CancellationTokenSource();
 
-            var t = Task.Factory.StartNew(() =>
+            var t = Task.Factory.StartNew(s =>
             {
+                Console.WriteLine(s.GetType().ToString());
 
-                while (!cancelationTocken.IsCancellationRequested)
+                var tocken = (CancellationToken)s;
+
+                while (true/*!cancelationTocken.IsCancellationRequested*/)
                 {
-                    Thread.Sleep(1000);
-                    Console.WriteLine($"Waiting for cancel");
+                    try
+                    {
+                        Thread.Sleep(1000);
+                        Console.WriteLine($"Waiting for cancel");
+                        tocken.ThrowIfCancellationRequested();
+                    }
+                    catch(OperationCanceledException)
+                    {
+                        break;
+                    }
                 }
 
 
@@ -36,8 +47,10 @@ namespace ExtendedSharp
             return cancelationTocken;
         }
 
-        public async void DoAsync()
+        public async Task DoAsync()
         {
+            Console.WriteLine("Sync");
+
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(5000); //Long tearm actions
@@ -46,6 +59,31 @@ namespace ExtendedSharp
             });
 
             Console.WriteLine("After await");
+
+            await Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(10000); //Long tearm actions
+
+                Console.WriteLine("In task");
+            });
+
+            Console.WriteLine("After await");
+        }
+
+        public void Do2Async()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(5000); //Long tearm actions
+
+                Console.WriteLine("In task");
+
+                return 15;
+            }).
+            ContinueWith(t =>
+            {
+                Console.WriteLine($"After await {t.AsyncState}");
+            });
         }
 
         public async Task DoWithReturnAsync()
@@ -95,12 +133,25 @@ namespace ExtendedSharp
 
     public class TasksTester
     {
+        public void TaskCancelTester()
+        {
+            var tester = new Tasks();
+            
+            var cs = tester.RunWithCancelation();
+
+            //Thread.Sleep(10000);
+
+            cs.CancelAfter(10000);
+        }
+
         public void TestAsync()
         {
+            Console.WriteLine("Before Async/await");
+            
             var t = new Tasks();
             t.DoAsync();
 
-            Console.WriteLine("In TestAsync");
+            Console.WriteLine("After async/await");
         }
 
         public void TestAsync2()
@@ -113,10 +164,13 @@ namespace ExtendedSharp
             retTask.Wait();
         }
 
-        public async void TestAsync3()
+        public async Task TestAsync3()
         {
             var t = new Tasks();
-            var resultValue = await t.DoWithIntReturnAsync();
+           
+            await t.DoAsync();
+
+            int resultValue = await t.DoWithIntReturnAsync();
 
             Console.WriteLine($"In TestAsync result = {resultValue}");
         }

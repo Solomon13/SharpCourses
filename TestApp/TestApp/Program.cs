@@ -66,14 +66,17 @@ namespace TestApp
             //var t1 = new ThreadSynchronization();
             //t1.ThreadsHellTest(enumSynchStateTester.Synchronization);
 
-            //var t = new ThreadingExtendedTester();
-            //t.TestDispatcher();
-            //t.TestTreadPool();
+            var t = new ThreadingExtendedTester();
+           // t.TestDispatcher();
+           // t.TestTreadPool();
 
             var t1 = new TasksTester();
-            t1.TestAsyncWithException();
+            //t1.TaskCancelTester();
+            //t1.TestAsyncWithException();
 
-            Console.WriteLine("After call");
+            t1.TestAsync();
+
+            //Console.WriteLine("After call");
 
             Console.ReadLine();
         }
