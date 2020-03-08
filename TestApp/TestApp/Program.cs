@@ -3,6 +3,7 @@ using OopSharp;
 using ReferenceLib;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -15,9 +16,18 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            var t = TestDbAsync();
+            var tester = new AdoNetTester();
+            var task = tester.TaskTestDbWithAsync();
 
-            while(!t.IsCompleted)
+            while (!task.IsCompleted)
+            {
+                Console.WriteLine("main tread still alive");
+                Thread.Sleep(50);
+            }
+
+            var oldT = tester.TestDbWithThread();
+
+            while (oldT.IsAlive)
             {
                 Console.WriteLine("Main tread still alive");
                 Thread.Sleep(50);
@@ -26,12 +36,7 @@ namespace TestApp
             Console.ReadLine();
         }
 
-        public static async Task TestDbAsync()
-        {
-            var db = new AdoNet();
-            var fileName = await db.WriteCustomersToFilesAsync();
+        
 
-            Console.WriteLine($"Writing to file completed. File name = {fileName}");
-        }
     }
 }

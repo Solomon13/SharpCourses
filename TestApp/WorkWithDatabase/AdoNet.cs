@@ -89,11 +89,11 @@ namespace WorkWithDatabase
             return products;
         }
 
-        public Task<IEnumerable<Product>> GetProductsAsync()
+        public Task<IEnumerable<Product>> GetProductsAsync(int delay = 2000)
         {
             return Task.Factory.StartNew(() =>
             {
-                Thread.Sleep(2000);
+                Thread.Sleep(delay);
                 return GetProducts(false);
             });
         }
@@ -113,5 +113,6 @@ namespace WorkWithDatabase
 
             return fileName;
         }
+
     }
 }
