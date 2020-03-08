@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using WorkWithDatabase;
 
 namespace TestApp
 {
@@ -13,72 +15,23 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            //var tester = new InheritanceTester();
-            //tester.TestPolymorph();
+            var t = TestDbAsync();
 
-            //// var abstractInstance = new AbstractClass(); -> imposible
-            //var derive = new AbstractDerive();
-
-            //var ex = new ExceptionsWorker();
-            //ex.HandleException2();
-            //ex.CatchByFinally();
-
-            //var generic = new ClassWithGeneric();
-            //Console.WriteLine($"Generic sum = { generic.Sum<int>(new int[] { 1, 2, 3 }, new Int32Adder())}");
-
-            //var delegateTester = new WorkWithDelegates();
-            //delegateTester.TestDelegates();
-            //delegateTester.TestMulticast();
-
-            //var eventTester = new WorkWithEventsTester();
-            //eventTester.TestEvents();
-
-            //var extr = new Extensions();
-            //extr.TestSum();
-            //extr.TestExtensions();
-
-            //var linq = new LINQ();
-            //linq.LinqDelayExecution();
-            //Console.WriteLine("=========================");
-
-            //linq.TestLinqMethod();
-
-
-            //var reflectionTester = new TypeReflectionTester();
-            //reflectionTester.DetectType();
-            //reflectionTester.InvokeMethodNoArgs();
-            //reflectionTester.InvokeMethodWithArgs();
-            //reflectionTester.InvokeStatic();
-            //reflectionTester.InvokePrivate();
-
-            //var attributesTester = new AttributesTester();
-            //attributesTester.TestClassAttribute();
-            //attributesTester.TestFieldAttribute();
-
-            //var assemblyTester = new DynamicLibraryTester();
-            //assemblyTester.TestDynamicAssembly();
-
-            //var t = new Threading();
-            //t.ThreadsWithDelegates();
-            //t.ThreadsWithDelegatesAndCallback();
-            //t.NewThread();
-
-            //var t1 = new ThreadSynchronization();
-            //t1.ThreadsHellTest(enumSynchStateTester.Synchronization);
-
-            var t = new ThreadingExtendedTester();
-           // t.TestDispatcher();
-           // t.TestTreadPool();
-
-            var t1 = new TasksTester();
-            //t1.TaskCancelTester();
-            //t1.TestAsyncWithException();
-
-            t1.TestAsync();
-
-            //Console.WriteLine("After call");
+            while(!t.IsCompleted)
+            {
+                Console.WriteLine("Main tread still alive");
+                Thread.Sleep(50);
+            }
 
             Console.ReadLine();
+        }
+
+        public static async Task TestDbAsync()
+        {
+            var db = new AdoNet();
+            var fileName = await db.WriteCustomersToFilesAsync();
+
+            Console.WriteLine($"Writing to file completed. File name = {fileName}");
         }
     }
 }

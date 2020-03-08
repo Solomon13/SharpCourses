@@ -66,6 +66,10 @@
       <Project>{6687aa53-0067-44a4-87da-507e6116ed4d}</Project>
       <Name>SimpleSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WorkWithDatabase\WorkWithDatabase.csproj">
+      <Project>{9daef4e3-3034-49a1-9237-b9c694f99fb6}</Project>
+      <Name>WorkWithDatabase</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
