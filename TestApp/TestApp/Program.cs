@@ -9,12 +9,21 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WorkWithDatabase;
+using WorkWithEntityFramework;
 
 namespace TestApp
 {
     class Program
     {
         static void Main(string[] args)
+        {
+            RunEntity();
+
+            Console.ReadLine();
+        }
+
+        
+        private static void RunAdoNet()
         {
             var tester = new AdoNetTester();
             var task = tester.TaskTestDbWithAsync();
@@ -32,11 +41,13 @@ namespace TestApp
                 Console.WriteLine("Main tread still alive");
                 Thread.Sleep(50);
             }
-
-            Console.ReadLine();
         }
 
-        
+        private static void RunEntity()
+        {
+            var entityTester = new EntityTester();
 
+            entityTester.CheckProductsWithEntityContext();
+        }
     }
 }
