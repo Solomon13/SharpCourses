@@ -35,6 +35,15 @@ namespace WorkWithDatabase
             return conn;
         }
 
+        /// <summary>
+        /// Creates connection async
+        /// </summary>
+        /// <returns>Opened connection</returns>
+        public Task<IDbConnection> CreateConnectionAsync()
+        {
+            return Task.Factory.StartNew(() => CreateConnection());
+        }
+
         public class Product
         {
             public int Id { get; set; }
@@ -46,73 +55,54 @@ namespace WorkWithDatabase
         /// Executes specified query
         /// </summary>
         /// <param name="query"></param>
-        public IEnumerable<Product> GetProducts(bool bPrint = true)
+        public IEnumerable<Product> GetProducts(IDbConnection conn, bool bPrint = true)
         {
             List<Product> products = new List<Product>();
 
             //Open Database
-            using(var conn = CreateConnection())
+
+            string query = "Select * from Products";
+
+            //Prepapare command to execure sql
+            IDbCommand command = new MySql.Data.MySqlClient.MySqlCommand(query);
+            command.Connection = conn;
+
+            //Prepare reader to receive data
+            IDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
             {
-                string query = "Select * from Products";
-
-                //Prepapare command to execure sql
-                IDbCommand command = new MySql.Data.MySqlClient.MySqlCommand(query);
-                command.Connection = conn;
-
-                //Prepare reader to receive data
-                IDataReader reader = command.ExecuteReader();
-
-                while(reader.Read())
+                try
                 {
-                    try
+                    //Be careful with types convertion 
+                    var product = new Product
                     {
-                        //Be careful with types convertion 
-                        var product = new Product
-                        {
-                            Id = reader.GetInt32(0),
-                            ProductName = reader["ProductName"].ToString(),
-                            Price = reader.GetDouble(2)
-                        };
-          
-                        if(bPrint)
-                            Console.WriteLine($"ProductId = {product.Id}\tProduct Name = {product.ProductName}\tPrice = {product.Price}");
+                        Id = reader.GetInt32(0),
+                        ProductName = reader["ProductName"].ToString(),
+                        Price = reader.GetDouble(2)
+                    };
 
-                        products.Add(product);
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Failed to read data");
-                    }
+                    if (bPrint)
+                        Console.WriteLine($"ProductId = {product.Id}\tProduct Name = {product.ProductName}\tPrice = {product.Price}");
+
+                    products.Add(product);
+                }
+                catch
+                {
+                    Console.WriteLine("Failed to read data");
                 }
             }
 
             return products;
         }
 
-        public Task<IEnumerable<Product>> GetProductsAsync(int delay = 2000)
+        public Task<IEnumerable<Product>> GetProductsAsync(IDbConnection conn, int delay = 2000)
         {
             return Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(delay);
-                return GetProducts(false);
+                return GetProducts(conn, false);
             });
         }
-
-        public async Task<string> WriteCustomersToFilesAsync()
-        {
-            var products = await GetProductsAsync();
-            var fileName = "test.txt";
-
-            using (StreamWriter file = new StreamWriter(fileName))
-            {
-                foreach (var product in products)
-                {
-                    await file.WriteLineAsync($"ProductId = {product.Id}\tProduct Name = {product.ProductName}\tPrice = {product.Price}");
-                }
-            }
-
-            return fileName;
-        }
-
     }
 }

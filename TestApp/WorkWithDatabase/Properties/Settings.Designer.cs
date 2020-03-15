@@ -25,8 +25,7 @@ namespace WorkWithDatabase.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("server=sql9.freesqldatabase.com;uid=sql9326603;pwd=4TDkZpMnJK;database=sql9326603" +
-            "")]
+        [global::System.Configuration.DefaultSettingValueAttribute("server=db4free.net;port=3306;uid=net_test_user;pwd=qweRTY12;database=net_courses;old guids=true;")]
         public string DbConnection {
             get {
                 return ((string)(this["DbConnection"]));
