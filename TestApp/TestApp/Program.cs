@@ -3,6 +3,7 @@ using OopSharp;
 using ReferenceLib;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure.Interception;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,10 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            RunEntity();
+            DbInterception.Add(new LogFormatter());
 
+            RunEntity();
+            //RunAdoNet();
             Console.ReadLine();
         }
 
@@ -47,7 +50,8 @@ namespace TestApp
         {
             var entityTester = new EntityTester();
 
-            entityTester.CheckProductsWithEntityContext();
+            //entityTester.CheckProductsWithEntityContext();
+            entityTester.WorkWithComplexRequest();
         }
     }
 }

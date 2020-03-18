@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 
 namespace WorkWithDatabase
 {
-
+    /// <summary>
+    /// This this my Ado sample class
+    /// </summary>
     public class AdoNet
     {
         /// <summary>

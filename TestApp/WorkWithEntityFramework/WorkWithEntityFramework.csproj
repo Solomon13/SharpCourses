@@ -97,6 +97,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="LogHelper.cs" />
     <Compile Include="Order.cs">
       <DependentUpon>DbDataModel.tt</DependentUpon>
     </Compile>
