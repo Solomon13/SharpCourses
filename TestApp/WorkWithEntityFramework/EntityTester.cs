@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -117,6 +119,55 @@ namespace WorkWithEntityFramework
 
                 //execute
                 var results = filteredJoinQuery.ToList();
+            }
+        }
+
+        public void TestNavigationLinks()
+        {
+            using (var context = new MySqlContext())
+            {
+                try
+                {
+                    foreach (var customer in context.Customers)
+                    {
+                        foreach (var order in customer.Orders)
+                        {
+                            Console.WriteLine($"Customer = {customer.CustomerName}\tOrder={order.OrderID}");
+                        }
+                    }
+                }
+                catch(EntityCommandExecutionException)
+                {
+                    Console.WriteLine("Oups. Problem of creation queries. See sample below how to fix it");
+                }
+
+
+
+                var customers = context.Customers.ToList();
+
+                //It's better now. No crash. But performance.... Pay attention to debug output to see what queries generated for DB
+                foreach (var customer in customers)
+                {
+                    foreach (var order in customer.Orders)
+                    {
+                        Console.WriteLine($"Customer = {customer.CustomerName}\tOrder={order.OrderID}");
+                    }
+                }
+
+
+                //Use Include method
+                customers = context.Customers.Include("Orders").ToList();
+
+                //Include("Orders.OrderProducts") -> use this include sub items
+
+                foreach (var customer in customers)
+                {
+                    foreach (var order in customer.Orders)
+                    {
+                        Console.WriteLine($"Customer = {customer.CustomerName}\tOrder={order.OrderID}");
+                    }
+                }
+
             }
         }
     }

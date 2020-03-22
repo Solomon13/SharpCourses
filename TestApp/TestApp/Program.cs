@@ -1,4 +1,5 @@
-﻿using ExtendedSharp;
+﻿
+using ExtendedSharp;
 using OopSharp;
 using ReferenceLib;
 using System;
@@ -49,8 +50,6 @@ namespace TestApp
         private static void RunEntity()
         {
             var entityTester = new EntityTester();
-
-            //entityTester.CheckProductsWithEntityContext();
             entityTester.WorkWithComplexRequest();
         }
     }
