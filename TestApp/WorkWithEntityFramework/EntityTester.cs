@@ -136,7 +136,7 @@ namespace WorkWithEntityFramework
                         }
                     }
                 }
-                catch(EntityCommandExecutionException)
+                catch(EntityCommandExecutionException e)
                 {
                     Console.WriteLine("Oups. Problem of creation queries. See sample below how to fix it");
                 }

@@ -50,7 +50,7 @@ namespace TestApp
         private static void RunEntity()
         {
             var entityTester = new EntityTester();
-            entityTester.WorkWithComplexRequest();
+            entityTester.TestNavigationLinks();
         }
     }
 }

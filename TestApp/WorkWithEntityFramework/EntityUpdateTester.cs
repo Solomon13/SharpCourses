@@ -51,7 +51,7 @@ namespace WorkWithEntityFramework
 
                 var order = context.Orders.Add(new Order
                 {
-                    Customer = newCustomer,
+                    CustomerID = newCustomer.CustomerID,
                     OrderDate = DateTime.Now
                 });
 
