@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp1.ViewModels;
 
 namespace WpfApp1
 {
@@ -22,6 +23,15 @@ namespace WpfApp1
         public RegistrationWindow()
         {
             InitializeComponent();
+
+            DataContext = new RegistrationViewModel();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = DataContext as RegistrationViewModel;
+
+            viewModel.FirstName = "Olga";
         }
     }
 }

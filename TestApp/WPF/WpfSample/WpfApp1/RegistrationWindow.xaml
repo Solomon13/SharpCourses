@@ -4,10 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
+        xmlns:converters="clr-namespace:WpfApp1.Converters"
         mc:Ignorable="d"
         Title="Registration Window" 
         Height="150" Width="300"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Window.Resources>
     
     <Grid Margin="15">
         <Grid.ColumnDefinitions>
@@ -24,13 +28,18 @@
         <TextBlock Text="User name" Grid.Row="0" Grid.Column="0" Margin="0,0,0,10"/>
         <TextBlock Text="User second name" Grid.Row="1" Grid.Column="0"/>
 
-        <TextBox Grid.Row="0" Grid.Column="1" Name="FirstNameTextBox" Margin="0,0,0,10"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Name="LastNameTextBox"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Name="FirstNameTextBox" Margin="0,0,0,10"
+                 Text="{Binding Path=FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="LastNameTextBox"
+                 Text="{Binding Path=LastName}"
+                 Height="{Binding Path=TextBoxHeight}"
+                 Visibility="{Binding Path=TextBoxVisibility, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
         <Button Grid.Row="2" Grid.Column="0" Content="Register" Grid.ColumnSpan="2"
                 VerticalAlignment="Top" 
                 HorizontalAlignment="Center"
-                Margin="0,15,0,0"/>
+                Margin="0,15,0,0"
+                MinWidth="75" Click="Button_Click"/>
 
     </Grid>
 </Window>
