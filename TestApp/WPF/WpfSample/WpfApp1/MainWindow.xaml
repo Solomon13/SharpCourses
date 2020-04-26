@@ -6,28 +6,63 @@
         xmlns:t="http://sharp.com/wpfapp"
         xmlns:local="clr-namespace:WpfApp1"
         xmlns:test="clr-namespace:WpfApp1.Test"
+        xmlns:m="clr-namespace:WpfApp1.Model"
         mc:Ignorable="d"
         Height="450" 
         Title="ASDFG"
-        Width="{x:Static t:Test.WindowWidth}">
-    <!--<Window.Background>
-        <LinearGradientBrush>
-            <LinearGradientBrush.GradientStops>
-                <GradientStop Offset="0.00" Color="Red" />
-                <GradientStop Offset="0.50" Color="Indigo" />
-                <GradientStop Offset="1.00" Color="Violet" />
-            </LinearGradientBrush.GradientStops>
-        </LinearGradientBrush>
-    </Window.Background>-->
+        Width="{x:Static t:Test.WindowWidth}"
+        DataContext="{x:Static local:App.MainVM}"
+        >
 
-    <DockPanel LastChildFill="False">
+    <DockPanel LastChildFill="True">
 
-        <Button Content="BUTTON" FontSize="52" VerticalAlignment="Center"
-                DockPanel.Dock="Top"/>
-        <TextBlock Text="Label" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top"
-                   DockPanel.Dock="Top"/>
-        <Button Grid.Row="2"
-                DockPanel.Dock="Top">asddasd</Button>
+        <ListBox Margin="10" ItemsSource="{Binding Path=Users}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Polygon Points="10,0 0,10, 20,10" Margin="0,2,5,0">
+                            <Polygon.Style>
+                                <Style TargetType="{x:Type Polygon}">
+                                    <Setter Property="Fill" Value="Blue"/>
+                                    <Setter Property="Stroke" Value="Blue"/>
 
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=Gender}" Value="{x:Static m:enumGender.Male}">
+                                            <Setter Property="LayoutTransform">
+                                                <Setter.Value>
+                                                    <RotateTransform Angle="180"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding Path=Gender}" Value="{x:Static m:enumGender.Female}">
+                                            <Setter Property="Fill" Value="Pink"/>
+                                            <Setter Property="Stroke" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=FirstName}" Value="Oleg"/>
+                                                <Condition Binding="{Binding Path=Gender}" Value="{x:Static m:enumGender.Male}"/>
+                                            </MultiDataTrigger.Conditions>
+
+                                            <MultiDataTrigger.Setters>
+                                                <Setter Property="Fill" Value="Yellow"/>
+                                                <Setter Property="Stroke" Value="Yellow"/>
+                                            </MultiDataTrigger.Setters>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Polygon.Style>
+                            <!--<Polygon.LayoutTransform>
+                                <RotateTransform Angle="180"/>
+                            </Polygon.LayoutTransform>-->
+                        </Polygon>
+                        <TextBlock Text="{Binding Path=FirstName}" Margin="0,0,5,0"/>
+                        <TextBlock Text="{Binding Path=LastName}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </DockPanel>
 </Window>

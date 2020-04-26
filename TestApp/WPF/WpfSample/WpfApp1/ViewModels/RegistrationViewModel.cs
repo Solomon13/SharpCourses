@@ -4,21 +4,20 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp1.Model;
 
 namespace WpfApp1.ViewModels
 {
-    public class RegistrationViewModel : INotifyPropertyChanged
+    public class RegistrationViewModel : BaseViewModel
     {
         private string _firstName;
         private string _lastName;
         private double _textBoxHeight;
-        //private bool _textBoxVisibility;
+        private enumGender[] _genders = Enum.GetValues(typeof(enumGender)) as enumGender[];
+        private enumGender _selectedGender = enumGender.Male;
 
         public RegistrationViewModel()
         {
-            //_firstName = "Sasha";
-            //_lastName = "Orlov";
-            _textBoxHeight = 30;
         }
 
         public string FirstName
@@ -51,12 +50,25 @@ namespace WpfApp1.ViewModels
             get { return !string.IsNullOrEmpty(_firstName); }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void RaisePropertyChanged(string name)
+        public enumGender[] Genders
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            get
+            {
+                return _genders;
+            }
+        }
+
+        public enumGender SelectedGender
+        {
+            get { return _selectedGender; }
+            set
+            {
+                if(_selectedGender != value)
+                {
+                    _selectedGender = value;
+                    RaisePropertyChanged(nameof(SelectedGender));
+                }
+            }
         }
     }
 }
