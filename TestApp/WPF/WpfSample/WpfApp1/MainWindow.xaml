@@ -13,10 +13,26 @@
         Width="{x:Static t:Test.WindowWidth}"
         DataContext="{x:Static local:App.MainVM}"
         >
+    <Window.Resources>
+        <!--<Style TargetType="{x:Type TextBlock}" x:Key="TextBlockGenderStyle">
+            <Setter Property="Foreground" Value="Blue"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Black"/>
+                </Trigger>
+                <DataTrigger Binding="{Binding Path=Gender}" Value="{x:Static m:enumGender.Female}">
+                    <Setter Property="Foreground" Value="Red"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>-->
+    </Window.Resources>
 
     <DockPanel LastChildFill="True">
-
-        <ListBox Margin="10" ItemsSource="{Binding Path=Users}">
+        <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5">
+            <Button Content="Add" MinWidth="50" Command="{Binding Path=AddUserCommand}"/>
+        </StackPanel>
+        <ListBox Margin="10,10,0,10" ItemsSource="{Binding Path=Users}" DockPanel.Dock="Left">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -59,7 +75,7 @@
                             </Polygon.LayoutTransform>-->
                         </Polygon>
                         <TextBlock Text="{Binding Path=FirstName}" Margin="0,0,5,0"/>
-                        <TextBlock Text="{Binding Path=LastName}"/>
+                        <TextBlock Text="{Binding Path=LastName}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

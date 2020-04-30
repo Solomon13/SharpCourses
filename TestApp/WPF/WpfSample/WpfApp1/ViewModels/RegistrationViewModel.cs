@@ -28,6 +28,7 @@ namespace WpfApp1.ViewModels
                 _firstName = value;
                 RaisePropertyChanged(nameof(FirstName));
                 RaisePropertyChanged(nameof(TextBoxVisibility));
+                RegisterCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -37,6 +38,8 @@ namespace WpfApp1.ViewModels
             set
             {
                 _lastName = value;
+                RaisePropertyChanged(nameof(LastName));
+                RegisterCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -68,6 +71,28 @@ namespace WpfApp1.ViewModels
                     _selectedGender = value;
                     RaisePropertyChanged(nameof(SelectedGender));
                 }
+            }
+        }
+
+        private RelayCommand _registerCommand;
+
+        public RelayCommand RegisterCommand
+        {
+            get {
+                return _registerCommand ?? (_registerCommand = new RelayCommand
+              (
+                  obj =>
+                  {
+                      var w = obj as RegistrationWindow;
+
+                      if (w != null)
+                          w.DialogResult = true;
+                  },
+                  obj =>
+                  {
+                      return !String.IsNullOrEmpty(FirstName) && !String.IsNullOrEmpty(LastName);
+                  }
+              ));
             }
         }
     }

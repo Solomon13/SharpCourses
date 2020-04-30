@@ -23,15 +23,6 @@ namespace WpfApp1
         public RegistrationWindow()
         {
             InitializeComponent();
-
-            DataContext = new RegistrationViewModel();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var viewModel = DataContext as RegistrationViewModel;
-
-            viewModel.FirstName = "Olga";
         }
     }
 }

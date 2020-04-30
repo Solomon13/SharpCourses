@@ -8,12 +8,13 @@
         mc:Ignorable="d"
         Title="Registration Window" 
         Height="190" Width="300"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Name="RegWindow">
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </Window.Resources>
     
-    <Grid Margin="15" TextBlock.FontSize="18">
+    <Grid Margin="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -26,15 +27,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="User name" Grid.Row="0" Grid.Column="0" Margin="0,0,0,10" FontSize="8"/>
+        <TextBlock Text="User name" Grid.Row="0" Grid.Column="0" Margin="0,0,0,10"/>
         <TextBlock Text="User second name" Grid.Row="1" Grid.Column="0"/>
         <TextBlock Text="Gender" Grid.Row="2" Grid.Column="0" Margin="0,10"/>
 
         <TextBox Grid.Row="0" Grid.Column="1" Name="FirstNameTextBox" Margin="0,0,0,10"
                  Text="{Binding Path=FirstName, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox Grid.Row="1" Grid.Column="1" Name="LastNameTextBox"
-                 Text="{Binding Path=LastName}"
-                 Visibility="{Binding Path=TextBoxVisibility, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                 Text="{Binding Path=LastName, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox ItemsSource="{Binding Path=Genders}" Grid.Row="2" Grid.Column="1" Margin="0,10"
                   SelectedItem="{Binding Path=SelectedGender}"/>
 
@@ -44,7 +44,9 @@
                 VerticalAlignment="Top" 
                 HorizontalAlignment="Center"
                 Margin="0,15,0,0"
-                MinWidth="75" Click="Button_Click"/>
+                MinWidth="75" 
+                Command="{Binding Path=RegisterCommand}"
+                CommandParameter="{Binding ElementName=RegWindow}"/>
 
     </Grid>
 </Window>

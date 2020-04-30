@@ -18,5 +18,35 @@ namespace WpfApp1.ViewModels
         };
 
         public ObservableCollection<User> Users => _users;
+
+        private RelayCommand _addUserCommand;
+
+        public RelayCommand AddUserCommand
+        {
+            get
+            {
+                return _addUserCommand ?? (_addUserCommand = new RelayCommand(
+                obj =>
+                {
+                    var vm = new RegistrationViewModel();
+                    var registrationWindow = new RegistrationWindow
+                    {
+                        DataContext = vm
+                    };
+
+                    if(registrationWindow.ShowDialog() == true)
+                    {
+                        Users.Add(new User(vm.FirstName, vm.LastName, vm.SelectedGender));
+                    }
+
+                },
+                obj =>
+                {
+                    return true;
+                }
+                ));
+            }
+        }
+
     }
 }
